@@ -4,27 +4,46 @@ let opened=false;
 let touchStartX=0;
 let touchStartY=0;
 let changing=false;
-const ASSET_VERSION="3.2.0";
+const ASSET_VERSION="3.3.0";
 const assetUrl=src=>`${src}${src.includes("?")?"&":"?"}v=${ASSET_VERSION}`;
 
 const $=id=>document.getElementById(id);
 const landing=$("landing"),reader=$("reader"),image=$("pageImage");
+const pageCanvas=$("pageCanvas"),pageCtx=pageCanvas.getContext("2d",{alpha:false,desynchronized:true});
+const coverCanvas=$("coverCanvas"),coverSource=$("coverSource"),coverCtx=coverCanvas.getContext("2d",{alpha:false,desynchronized:true});
 const contents=$("contents"),scrim=$("scrim"),thumbGrid=$("thumbGrid");
 
-function fitPageToWholePixels(){
-  if(!image.naturalWidth||!image.naturalHeight)return;
-  const book=$("book");
-  const bounds=book.getBoundingClientRect();
-  const scale=Math.min(bounds.width/image.naturalWidth,bounds.height/image.naturalHeight,1);
-  // Whole CSS-pixel dimensions avoid Safari creating a low-resolution
-  // intermediate raster for fractional image sizes.
-  const width=Math.max(1,Math.floor(image.naturalWidth*scale));
-  const height=Math.max(1,Math.floor(image.naturalHeight*scale));
-  image.style.width=`${width}px`;
-  image.style.height=`${height}px`;
+function drawSourceAtNativeResolution(source,canvas,ctx,container){
+  if(!source.naturalWidth||!source.naturalHeight||!ctx)return;
+  const bounds=container.getBoundingClientRect();
+  const scale=Math.min(bounds.width/source.naturalWidth,bounds.height/source.naturalHeight,1);
+  const cssWidth=Math.max(1,Math.floor(source.naturalWidth*scale));
+  const cssHeight=Math.max(1,Math.floor(source.naturalHeight*scale));
+
+  // Keep the canvas backing store at the source image's native pixel size.
+  // Safari then performs one high-quality downsample instead of repeatedly
+  // rasterising a transformed or fractionally sized <img> layer.
+  if(canvas.width!==source.naturalWidth)canvas.width=source.naturalWidth;
+  if(canvas.height!==source.naturalHeight)canvas.height=source.naturalHeight;
+  canvas.style.width=`${cssWidth}px`;
+  canvas.style.height=`${cssHeight}px`;
+  ctx.imageSmoothingEnabled=true;
+  ctx.imageSmoothingQuality="high";
+  ctx.clearRect(0,0,canvas.width,canvas.height);
+  ctx.drawImage(source,0,0,source.naturalWidth,source.naturalHeight);
 }
 
+function fitPageToWholePixels(){
+  drawSourceAtNativeResolution(image,pageCanvas,pageCtx,$("book"));
+}
+
+function renderCoverCanvas(){
+  drawSourceAtNativeResolution(coverSource,coverCanvas,coverCtx,landing);
+}
+
+
 async function boot(){
+  if(coverSource.complete){renderCoverCanvas()}else{coverSource.addEventListener("load",renderCoverCanvas,{once:true})}
   pages=await fetch("pages.json",{cache:"no-store"}).then(r=>r.json());
   buildContents();
   const hash=location.hash.replace("#page-","");
@@ -67,7 +86,8 @@ function render(index,animate=true,direction="next"){
     image.classList.remove("turn-next","turn-prev");
   }
   image.src=nextSrc;
-  image.alt=`NÜ-LINE Edition I — ${p.title}`;
+  image.alt="";
+  pageCanvas.setAttribute("aria-label",`NÜ-LINE Edition I — ${p.title}`);
   const finishRender=()=>{
     fitPageToWholePixels();
     if(!animate){changing=false;return}
@@ -134,9 +154,12 @@ window.addEventListener("hashchange",()=>{
   if(i>=0)openReader(i,false);
 });
 
-window.addEventListener("resize",fitPageToWholePixels,{passive:true});
-window.addEventListener("orientationchange",()=>setTimeout(fitPageToWholePixels,150),{passive:true});
-if("ResizeObserver" in window)new ResizeObserver(fitPageToWholePixels).observe($("book"));
+window.addEventListener("resize",()=>{fitPageToWholePixels();renderCoverCanvas()},{passive:true});
+window.addEventListener("orientationchange",()=>setTimeout(()=>{fitPageToWholePixels();renderCoverCanvas()},150),{passive:true});
+if("ResizeObserver" in window){
+  new ResizeObserver(fitPageToWholePixels).observe($("book"));
+  new ResizeObserver(renderCoverCanvas).observe(landing);
+}
 
 if("serviceWorker" in navigator)window.addEventListener("load",()=>navigator.serviceWorker.register("service-worker.js"));
 boot().catch(err=>{console.error(err);document.body.innerHTML="<p style='padding:40px;color:white'>The digital book could not load. Please refresh the page.</p>"});

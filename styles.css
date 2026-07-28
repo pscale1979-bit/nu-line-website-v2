@@ -227,3 +227,39 @@ body.contact-open{overflow:hidden}
   .reader{padding-top:calc(68px + var(--safe-top));padding-bottom:calc(104px + var(--safe-bottom))}
   .book{height:calc(100svh - 182px)}
 }
+
+
+/* Version 3.3 — native-pixel canvas renderer
+   Brochure artwork is painted once into a canvas whose backing store matches
+   the JPG's original pixel dimensions. The visible canvas is then reduced to
+   whole CSS pixels, avoiding Safari's soft intermediate image raster. */
+.page-source,.cover-source{
+  position:absolute!important;
+  width:1px!important;
+  height:1px!important;
+  opacity:0!important;
+  pointer-events:none!important;
+  overflow:hidden!important;
+}
+.page-canvas{
+  display:block;
+  max-width:none;
+  max-height:none;
+  box-shadow:0 24px 70px rgba(0,0,0,.55);
+  image-rendering:auto;
+  transform:none!important;
+  filter:none!important;
+}
+.cover-canvas{
+  position:absolute;
+  inset:0;
+  margin:auto;
+  display:block;
+  max-width:100%;
+  max-height:100%;
+  image-rendering:auto;
+}
+@media(max-width:760px){
+  .cover-canvas{inset:0 auto auto 50%;transform:translateX(-50%)!important}
+  .page-canvas{box-shadow:0 18px 46px rgba(0,0,0,.45)}
+}

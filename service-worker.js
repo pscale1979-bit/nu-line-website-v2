@@ -1,5 +1,5 @@
-const CACHE="nu-line-edition-v3.2";
-const CORE=["./","index.html","styles.css?v=3.2.0","app.js?v=3.2.0","config.js?v=3.2.0","pages.json","manifest.webmanifest","01-cover.jpg"];
+const CACHE="nu-line-edition-v3.3";
+const CORE=["./","index.html","styles.css?v=3.3.0","app.js?v=3.3.0","config.js?v=3.3.0","pages.json","manifest.webmanifest","01-cover.jpg"];
 self.addEventListener("install",event=>event.waitUntil(caches.open(CACHE).then(cache=>cache.addAll(CORE)).then(()=>self.skipWaiting())));
 self.addEventListener("activate",event=>event.waitUntil(caches.keys().then(keys=>Promise.all(keys.filter(key=>key!==CACHE).map(key=>caches.delete(key)))).then(()=>self.clients.claim())));
 self.addEventListener("fetch",event=>{
