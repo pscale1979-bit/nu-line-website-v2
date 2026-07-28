@@ -167,3 +167,63 @@ body.contact-open{overflow:hidden}
     backface-visibility:visible!important;
   }
 }
+
+/* Version 3.2 — native-resolution Safari renderer
+   Keep every brochure page on a single, untransformed image layer and size it
+   to whole CSS pixels. This prevents iPhone Safari from resampling a page at
+   fractional dimensions and then enlarging the cached raster. */
+.page-stage{
+  display:flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  overflow:visible;
+  contain:none;
+}
+.page-image{
+  max-width:none!important;
+  max-height:none!important;
+  width:auto;
+  height:auto;
+  object-fit:fill;
+  image-rendering:-webkit-optimize-contrast;
+  image-rendering:auto;
+  opacity:1!important;
+  animation:none!important;
+  transition:none!important;
+  contain:none;
+}
+.page-image.turn-next,.page-image.turn-prev{animation:none!important}
+
+@media(max-width:760px){
+  /* Show the supplied portrait cover at its own aspect ratio rather than
+     enlarging and cropping it as a full-screen background. */
+  .landing{
+    min-height:100svh;
+    display:block;
+    background:#080c0d;
+  }
+  .cover-image{
+    position:absolute;
+    inset:0;
+    width:100%;
+    height:100%;
+    object-fit:contain;
+    object-position:top center;
+  }
+  .cover-shade{
+    background:linear-gradient(0deg,rgba(4,7,8,.88) 0%,rgba(4,7,8,.18) 40%,transparent 72%);
+  }
+  .landing-content{
+    position:absolute;
+    left:18px;
+    right:18px;
+    bottom:calc(92px + var(--safe-bottom));
+    width:auto;
+    padding:0;
+  }
+  .landing-content .eyebrow,.landing-content h1,.landing-content>p:not(.eyebrow){display:none}
+  .primary-button{background:rgba(7,10,11,.88)}
+  .swipe-hint{display:none}
+  .reader{padding-top:calc(68px + var(--safe-top));padding-bottom:calc(104px + var(--safe-bottom))}
+  .book{height:calc(100svh - 182px)}
+}

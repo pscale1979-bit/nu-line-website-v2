@@ -4,12 +4,25 @@ let opened=false;
 let touchStartX=0;
 let touchStartY=0;
 let changing=false;
-const ASSET_VERSION="3.1.0";
+const ASSET_VERSION="3.2.0";
 const assetUrl=src=>`${src}${src.includes("?")?"&":"?"}v=${ASSET_VERSION}`;
 
 const $=id=>document.getElementById(id);
 const landing=$("landing"),reader=$("reader"),image=$("pageImage");
 const contents=$("contents"),scrim=$("scrim"),thumbGrid=$("thumbGrid");
+
+function fitPageToWholePixels(){
+  if(!image.naturalWidth||!image.naturalHeight)return;
+  const book=$("book");
+  const bounds=book.getBoundingClientRect();
+  const scale=Math.min(bounds.width/image.naturalWidth,bounds.height/image.naturalHeight,1);
+  // Whole CSS-pixel dimensions avoid Safari creating a low-resolution
+  // intermediate raster for fractional image sizes.
+  const width=Math.max(1,Math.floor(image.naturalWidth*scale));
+  const height=Math.max(1,Math.floor(image.naturalHeight*scale));
+  image.style.width=`${width}px`;
+  image.style.height=`${height}px`;
+}
 
 async function boot(){
   pages=await fetch("pages.json",{cache:"no-store"}).then(r=>r.json());
@@ -56,10 +69,9 @@ function render(index,animate=true,direction="next"){
   image.src=nextSrc;
   image.alt=`NÜ-LINE Edition I — ${p.title}`;
   const finishRender=()=>{
+    fitPageToWholePixels();
     if(!animate){changing=false;return}
-    void image.offsetWidth;
-    image.classList.add(direction==="prev"?"turn-prev":"turn-next");
-    setTimeout(()=>{image.classList.remove("turn-next","turn-prev");changing=false},260);
+    changing=false;
   };
   if(image.decode){image.decode().then(finishRender).catch(finishRender)}else{image.onload=finishRender;}
   $("pageNumber").textContent=p.number==="cover"?"Cover":`Page ${p.number}`;
@@ -121,6 +133,10 @@ window.addEventListener("hashchange",()=>{
   const i=pages.findIndex(p=>String(p.number).toLowerCase()===h.toLowerCase());
   if(i>=0)openReader(i,false);
 });
+
+window.addEventListener("resize",fitPageToWholePixels,{passive:true});
+window.addEventListener("orientationchange",()=>setTimeout(fitPageToWholePixels,150),{passive:true});
+if("ResizeObserver" in window)new ResizeObserver(fitPageToWholePixels).observe($("book"));
 
 if("serviceWorker" in navigator)window.addEventListener("load",()=>navigator.serviceWorker.register("service-worker.js"));
 boot().catch(err=>{console.error(err);document.body.innerHTML="<p style='padding:40px;color:white'>The digital book could not load. Please refresh the page.</p>"});
