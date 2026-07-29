@@ -1,128 +1,92 @@
 [
   {
-    "number": "cover",
-    "title": "Cover",
-    "src": "01-cover.jpg",
-    "portrait": true
-  },
-  {
-    "number": "02",
-    "title": "A Commitment to Quality",
-    "src": "02-02.jpg",
-    "portrait": false
-  },
-  {
-    "number": "03",
-    "title": "Built on Experience",
-    "src": "03-03.jpg",
-    "portrait": false
-  },
-  {
-    "number": "04",
-    "title": "Trusted Architectural Glazing Specialists",
-    "src": "04-04.jpg",
-    "portrait": false
-  },
-  {
-    "number": "05",
-    "title": "Architectural Glazing Solutions",
-    "src": "05-05.jpg",
-    "portrait": false
-  },
-  {
-    "number": "06",
-    "title": "Sheerline Prestige",
-    "src": "06-06.jpg",
-    "portrait": false
-  },
-  {
-    "number": "07",
-    "title": "HYLINE",
-    "src": "07-07.jpg",
-    "portrait": false
-  },
-  {
     "number": "08",
     "title": "HYLINE",
     "src": "08-08.jpg",
-    "portrait": false
+    "portrait": true
   },
   {
     "number": "09",
-    "title": "18mm Patented Sightline",
+    "title": "18 mm Patented Sightline",
     "src": "09-09.jpg",
-    "portrait": false
+    "portrait": true
   },
   {
     "number": "10",
-    "title": "Designed Around Light",
+    "title": "HYLINE Designed Around Light",
     "src": "10-10.jpg",
-    "portrait": false
+    "portrait": true
   },
   {
     "number": "11",
     "title": "HYLINE Inspiration",
     "src": "11-11.jpg",
-    "portrait": false
+    "portrait": true
   },
   {
     "number": "12",
     "title": "Fortis Premium Doors",
     "src": "12-12.jpg",
-    "portrait": false
+    "portrait": true
   },
   {
     "number": "13",
     "title": "Fortis Inspiration",
     "src": "13-13.jpg",
-    "portrait": false
+    "portrait": true
   },
   {
     "number": "14",
     "title": "Residence 9",
     "src": "14-14.jpg",
-    "portrait": false
+    "portrait": true
   },
   {
     "number": "15",
     "title": "Heritage Installations",
     "src": "15-15.jpg",
-    "portrait": false
+    "portrait": true
   },
   {
     "number": "16",
     "title": "Contemporary Architectural Installations",
     "src": "16-16.jpg",
-    "portrait": false
+    "portrait": true
   },
   {
     "number": "17",
     "title": "Glass Balustrades",
     "src": "17-17.jpg",
-    "portrait": false
+    "portrait": true
   },
   {
     "number": "18",
     "title": "Rooflights",
     "src": "18-18.jpg",
-    "portrait": false
+    "portrait": true
   },
   {
     "number": "19",
     "title": "Commercial Projects",
     "src": "19-19.jpg",
-    "portrait": false
+    "portrait": true
   },
   {
     "number": "20",
     "title": "From Concept to Completion",
     "src": "20-20.jpg",
-    "portrait": false
+    "portrait": true
   },
   {
     "number": "21",
     "title": "Why Choose NÜ-LINE",
     "src": "21-21.jpg",
-    "portrait": false
+    "portrait": true
+  },
+  {
+    "number": "22",
+    "title": "Contact",
+    "src": "22-contact.jpg",
+    "portrait": true
   }
 ]
