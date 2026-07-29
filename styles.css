@@ -263,3 +263,24 @@ body.contact-open{overflow:hidden}
   .cover-canvas{inset:0 auto auto 50%;transform:translateX(-50%)!important}
   .page-canvas{box-shadow:0 18px 46px rgba(0,0,0,.45)}
 }
+
+
+/* Version 3.4 — reliable desktop reader navigation */
+.reader{overscroll-behavior:contain}
+.book{cursor:pointer}
+@media (hover:hover) and (pointer:fine){
+  .book::after{
+    content:"Scroll or click to turn pages";
+    position:absolute;
+    left:50%;
+    bottom:-28px;
+    transform:translateX(-50%);
+    color:var(--muted);
+    font-size:9px;
+    letter-spacing:.13em;
+    text-transform:uppercase;
+    white-space:nowrap;
+    opacity:.72;
+    pointer-events:none;
+  }
+}

@@ -4,7 +4,7 @@ let opened=false;
 let touchStartX=0;
 let touchStartY=0;
 let changing=false;
-const ASSET_VERSION="3.3.0";
+const ASSET_VERSION="3.4.0";
 const assetUrl=src=>`${src}${src.includes("?")?"&":"?"}v=${ASSET_VERSION}`;
 
 const $=id=>document.getElementById(id);
@@ -145,6 +145,46 @@ $("book").addEventListener("touchend",e=>{
   const dx=t.screenX-touchStartX,dy=t.screenY-touchStartY;
   if(Math.abs(dx)>55&&Math.abs(dx)>Math.abs(dy)*1.3){dx<0?next():prev()}
 },{passive:true});
+
+// Version 3.4 — desktop mouse-wheel and trackpad page navigation.
+// The brochure is a single-screen reader rather than a vertically scrolling document,
+// so translate deliberate vertical wheel gestures into previous/next page actions.
+let wheelDelta=0;
+let wheelResetTimer=0;
+let wheelLockedUntil=0;
+function readerOverlayOpen(){
+  return contents.classList.contains("open")||contactPanel?.classList.contains("open");
+}
+function handleReaderWheel(e){
+  if(!opened||reader.hidden||readerOverlayOpen())return;
+  const now=Date.now();
+  e.preventDefault();
+  if(now<wheelLockedUntil)return;
+
+  const unit=e.deltaMode===1?16:e.deltaMode===2?window.innerHeight:1;
+  const delta=e.deltaY*unit;
+  if(Math.abs(delta)<1)return;
+
+  // If the user reverses direction, start a fresh gesture.
+  if(wheelDelta&&Math.sign(delta)!==Math.sign(wheelDelta))wheelDelta=0;
+  wheelDelta+=delta;
+  clearTimeout(wheelResetTimer);
+  wheelResetTimer=setTimeout(()=>{wheelDelta=0},180);
+
+  if(Math.abs(wheelDelta)>=45){
+    wheelDelta>0?next():prev();
+    wheelDelta=0;
+    wheelLockedUntil=now+420;
+  }
+}
+reader.addEventListener("wheel",handleReaderWheel,{passive:false});
+
+// Also let desktop users click the left or right half of the brochure page.
+$("book").addEventListener("click",e=>{
+  if(readerOverlayOpen()||e.target.closest("button,a,input,select,textarea"))return;
+  const rect=$("book").getBoundingClientRect();
+  e.clientX<rect.left+rect.width/2?prev():next();
+});
 
 window.addEventListener("hashchange",()=>{
   if(location.hash==="#contact"){openContact();return}
