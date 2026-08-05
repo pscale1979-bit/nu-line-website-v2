@@ -1,15 +1,14 @@
-# NÜ-LINE Website V3
+# NÜ-LINE Digital Book Website — Version 3.4
 
-A static, responsive website for NÜ-LINE Architectural Glazing.
+Version 3.4 preserves the live website, brochure artwork, contact form and Supabase enquiry connection.
 
-## Deploy to Vercel
-1. Upload this folder to a new GitHub repository, or replace the files in the existing website repository.
-2. Import the repository into Vercel.
-3. No build command is required. Framework preset: Other.
-4. Publish directory: root (`.`).
+## Desktop navigation fix
 
-## Brochures
-Official HYLINE and Sheerline PDF downloads are stored under `assets/downloads/`.
+- Adds mouse-wheel navigation for Windows and Mac laptops.
+- Supports both traditional mouse wheels and touchpad scrolling.
+- Adds click-left/click-right page turning on desktop.
+- Retains swipe, arrow-button and keyboard navigation.
+- Prevents rapid trackpad gestures from skipping several pages.
+- Updates cache-busting and the service-worker cache to Version 3.4.
 
-## Contact form
-The current form opens the visitor's email client using `mailto:`. It can later be connected to Supabase, Formspree or the NÜ-LINE CRM.
+Deploy all files together so browsers receive the new JavaScript and service worker.

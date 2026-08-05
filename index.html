@@ -3,97 +3,154 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <meta name="theme-color" content="#0b0d0e">
-  <meta name="description" content="NÜ-LINE Architectural Glazing — premium aluminium glazing systems for architects, developers, contractors and discerning homeowners.">
-  <title>NÜ-LINE Architectural Glazing</title>
-  <link rel="stylesheet" href="styles.css">
+  <meta name="theme-color" content="#080c0d">
+  <meta name="description" content="NÜ-LINE Architectural Glazing — Edition I. Premium architectural glazing for architects, contractors, developers and private clients.">
+  <title>NÜ-LINE Architectural Glazing | Edition I — Version 3.4</title>
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" href="01-cover.jpg?v=3.4.0">
+  <link rel="preload" as="image" href="01-cover.jpg?v=3.4.0">
+  <link rel="stylesheet" href="styles.css?v=3.4.0">
 </head>
 <body>
-  <div class="noise" aria-hidden="true"></div>
-  <header class="site-header" id="top">
-    <a class="wordmark" href="#top" aria-label="NÜ-LINE home">
-      <span>NÜ-LINE</span><small>ARCHITECTURAL GLAZING</small>
+  <div class="grain" aria-hidden="true"></div>
+
+  <header class="topbar">
+    <a class="brand" href="#cover" aria-label="NÜ-LINE home">
+      <span>NÜ-LINE</span>
+      <small>ARCHITECTURAL GLAZING</small>
     </a>
-    <button class="menu-toggle" type="button" aria-label="Open navigation" aria-expanded="false"><span></span><span></span></button>
-    <nav class="main-nav" aria-label="Primary navigation">
-      <a href="#about">About</a><a href="#systems">Systems</a><a href="#projects">Projects</a><a href="#professionals">Architects</a><a href="#resources">Brochures</a><a href="#contact">Contact</a>
-    </nav>
+    <div class="top-actions">
+      <button id="contentsBtn" class="text-button" type="button">Contents</button>
+      <button id="contactBtn" class="text-button" type="button">Contact</button>
+      <button id="beginProjectBtn" class="text-button project-link" type="button">Begin a project</button>
+    </div>
   </header>
 
   <main>
-    <section class="hero" aria-labelledby="hero-title">
-      <img src="assets/images/01-cover.jpg" alt="Contemporary home featuring expansive architectural glazing">
-      <div class="hero-overlay"></div>
-      <div class="hero-content reveal">
-        <p class="kicker">PREMIUM ARCHITECTURAL GLAZING</p>
-        <h1 id="hero-title">Light.<br>Space.<br>Architecture.</h1>
-        <p class="hero-copy">Bespoke glazing solutions delivered with technical expertise, precise installation and uncompromising attention to detail.</p>
-        <div class="hero-actions"><a class="button primary" href="#projects">Explore our work</a><a class="button ghost" href="#contact">Begin a project</a></div>
+    <section id="landing" class="landing" aria-label="Edition I cover">
+      <canvas id="coverCanvas" class="cover-canvas" aria-label="NÜ-LINE Architectural Glazing Edition I cover"></canvas>
+      <img id="coverSource" class="cover-source" src="01-cover.jpg?v=3.4.0" alt="">
+      <div class="cover-shade"></div>
+      <div class="landing-content">
+        <p class="eyebrow">NÜ-LINE ARCHITECTURAL GLAZING</p>
+        <h1>Edition I</h1>
+        <p>A digital architectural glazing portfolio.</p>
+        <button id="openBook" class="primary-button" type="button">
+          <span>Open Edition I</span><span aria-hidden="true">→</span>
+        </button>
       </div>
-      <a class="scroll-cue" href="#about" aria-label="Scroll to about">Scroll <span>↓</span></a>
+      <p class="swipe-hint">Scroll, swipe, use the arrows, or tap the page edges</p>
     </section>
 
-    <section class="intro section" id="about">
-      <div class="section-label">01 — NÜ-LINE</div>
-      <div class="intro-grid">
-        <div class="reveal"><p class="kicker gold">BUILT ON EXPERIENCE</p><h2>Architectural glazing, delivered properly.</h2></div>
-        <div class="intro-copy reveal">
-          <p class="lead">NÜ-LINE brings together nearly three decades of experience across manufacture, installation, surveying, sales and project management.</p>
-          <p>We work with homeowners, architects, contractors and developers to deliver premium glazing packages—from refined heritage windows to ultra-minimal sliding systems and complete commercial façades.</p>
-          <div class="stats"><div><strong>29</strong><span>Years of industry experience</span></div><div><strong>UK &amp; Caribbean</strong><span>Project delivery experience</span></div><div><strong>One team</strong><span>Survey to installation</span></div></div>
+    <section id="reader" class="reader" hidden aria-label="Digital brochure reader">
+      <div class="book-shell">
+        <button id="prevBtn" class="edge-button edge-left" aria-label="Previous page">‹</button>
+        <div id="book" class="book" tabindex="0">
+          <div id="pageStage" class="page-stage">
+            <canvas id="pageCanvas" class="page-canvas" role="img" aria-label="NÜ-LINE Edition I brochure page"></canvas>
+            <img id="pageImage" class="page-image page-source" alt="">
+            <div id="pageTurn" class="page-turn" aria-hidden="true"></div>
+          </div>
         </div>
+        <button id="nextBtn" class="edge-button edge-right" aria-label="Next page">›</button>
       </div>
-    </section>
 
-    <section class="systems section dark" id="systems">
-      <div class="section-head reveal"><div><p class="kicker gold">SELECTED SYSTEMS</p><h2>Designed around the architecture.</h2></div><p>We specify each system around the design intent, performance requirements and character of the property—not around a one-size-fits-all catalogue.</p></div>
-      <div class="system-grid">
-        <article class="system-card large reveal"><img src="assets/images/09-09.jpg" alt="Minimal framed sliding glazing"><div class="card-shade"></div><div class="card-copy"><span>FLAGSHIP</span><h3>HYLINE Minimal Systems</h3><p>Maximum glass, ultra-minimal aluminium and uninterrupted architectural views.</p><a href="#resources">View brochures →</a></div></article>
-        <article class="system-card reveal"><img src="assets/images/06-06.jpg" alt="Contemporary aluminium glazing"><div class="card-shade"></div><div class="card-copy"><span>ALUMINIUM</span><h3>Sheerline</h3><p>High-performance windows, bifolds, doors and roofing systems.</p><a href="#resources">View brochures →</a></div></article>
-        <article class="system-card reveal"><img src="assets/images/14-14.jpg" alt="Residence 9 heritage windows"><div class="card-shade"></div><div class="card-copy"><span>HERITAGE</span><h3>Residence 9</h3><p>Traditional proportions with modern thermal performance.</p><a href="#contact">Discuss your project →</a></div></article>
-      </div>
-    </section>
-
-    <section class="projects section" id="projects">
-      <div class="section-head reveal"><div><p class="kicker gold">SELECTED WORK</p><h2>From concept to completion.</h2></div><p>Residential, heritage and commercial glazing delivered with the same focus on finish, coordination and long-term performance.</p></div>
-      <div class="project-grid">
-        <figure class="project project-wide reveal"><img src="assets/images/19-19.jpg" alt="Commercial architectural glazing project"><figcaption><span>Commercial</span><strong>Building envelopes &amp; façades</strong></figcaption></figure>
-        <figure class="project reveal"><img src="assets/images/17-17.jpg" alt="Minimal sliding door installation"><figcaption><span>Residential</span><strong>Seamless indoor–outdoor living</strong></figcaption></figure>
-        <figure class="project reveal"><img src="assets/images/18-18.jpg" alt="Rooflight and architectural glass installation"><figcaption><span>Roof glazing</span><strong>Natural light, engineered</strong></figcaption></figure>
-        <figure class="project project-wide reveal"><img src="assets/images/15-15.jpg" alt="Heritage window installations"><figcaption><span>Heritage</span><strong>Respecting character, improving performance</strong></figcaption></figure>
-      </div>
-    </section>
-
-    <section class="professionals section split" id="professionals">
-      <div class="split-image reveal"><img src="assets/images/03-03.jpg" alt="Architectural glazing overlooking a landscape"></div>
-      <div class="split-copy reveal"><p class="kicker gold">ARCHITECTS &amp; DEVELOPERS</p><h2>Earlier input.<br>Better outcomes.</h2><p class="lead">We support design teams from early-stage system selection through survey, detailing, coordination, installation and handover.</p>
-        <ul><li>System and specification guidance</li><li>U-value and performance support</li><li>Surveying and construction detailing</li><li>Coordination with architects and contractors</li><li>Commercial project management</li><li>Quality-controlled installation</li></ul>
-        <a class="text-link" href="#contact">Talk to us about a project →</a>
-      </div>
-    </section>
-
-    <section class="process section dark">
-      <div class="section-head reveal"><div><p class="kicker gold">OUR PROCESS</p><h2>Clear from the first conversation.</h2></div></div>
-      <ol class="process-list reveal"><li><span>01</span><div><h3>Consult</h3><p>Understand the architecture, scope, budget and programme.</p></div></li><li><span>02</span><div><h3>Specify</h3><p>Select the right system, glass, finish and performance level.</p></div></li><li><span>03</span><div><h3>Survey &amp; coordinate</h3><p>Verify dimensions, interfaces and installation requirements.</p></div></li><li><span>04</span><div><h3>Deliver</h3><p>Manage manufacture, logistics, installation and handover.</p></div></li></ol>
-    </section>
-
-    <section class="resources section" id="resources">
-      <div class="section-head reveal"><div><p class="kicker gold">TECHNICAL LIBRARY</p><h2>Official product brochures.</h2></div><p>The website keeps NÜ-LINE’s own projects and design approach front and centre. Detailed manufacturer information is available here when you need it.</p></div>
-      <div class="resource-groups">
-        <div class="resource-group reveal"><div class="resource-title"><span>01</span><h3>HYLINE</h3></div><p>Minimal-frame sliding, window, wall and specialist systems.</p><div class="download-list" id="hylineDownloads"></div></div>
-        <div class="resource-group reveal"><div class="resource-title"><span>02</span><h3>Sheerline</h3></div><p>Homeowner inspiration and product performance information.</p><div class="download-list"><a href="assets/downloads/sheerline/NU-LINE-Sheerline-Homeowner-Brochure.pdf" download><span>Homeowner Brochure</span><em>PDF ↓</em></a><a href="assets/downloads/sheerline/NU-LINE-Sheerline-Product-Brochure.pdf" download><span>Product Brochure</span><em>PDF ↓</em></a></div></div>
-      </div>
-    </section>
-
-    <section class="contact section dark" id="contact">
-      <div class="contact-grid">
-        <div class="reveal"><p class="kicker gold">START A CONVERSATION</p><h2>Tell us what you are planning.</h2><p class="lead">Whether you have drawings ready or just an idea, the right first step is a conversation.</p><div class="contact-details"><a href="tel:+447732062023">07732 062023</a><a href="mailto:paul@nu-lineglazing.co.uk">paul@nu-lineglazing.co.uk</a><a href="https://www.nu-lineglazing.co.uk">nu-lineglazing.co.uk</a></div></div>
-        <form class="contact-form reveal" action="mailto:paul@nu-lineglazing.co.uk" method="post" enctype="text/plain"><label>Name<input name="Name" required></label><label>Email<input name="Email" type="email" required></label><label>Telephone<input name="Telephone" type="tel"></label><label>Project type<select name="Project type"><option>Residential glazing</option><option>Architect / specification enquiry</option><option>Developer / contractor enquiry</option><option>Heritage project</option><option>Commercial project</option></select></label><label class="full">Project details<textarea name="Project details" rows="5" required></textarea></label><button class="button primary full" type="submit">Send project enquiry →</button></form>
+      <div class="reader-controls">
+        <div class="progress-wrap">
+          <div id="progressBar" class="progress-bar"></div>
+        </div>
+        <div class="control-row">
+          <button id="prevSmall" class="round-button" type="button" aria-label="Previous page">←</button>
+          <div class="page-meta">
+            <strong id="pageNumber">Cover</strong>
+            <span id="pageTitle">Cover</span>
+          </div>
+          <button id="nextSmall" class="round-button" type="button" aria-label="Next page">→</button>
+        </div>
       </div>
     </section>
   </main>
 
-  <footer><a class="wordmark" href="#top"><span>NÜ-LINE</span><small>ARCHITECTURAL GLAZING</small></a><p>Premium architectural glazing for exceptional spaces.</p><div><a href="mailto:paul@nu-lineglazing.co.uk">Email</a><a href="tel:+447732062023">Call</a><a href="#resources">Brochures</a></div><small>© <span id="year"></span> NÜ-LINE Architectural Glazing</small></footer>
-  <script src="app.js"></script>
+  <aside id="contents" class="contents" aria-hidden="true">
+    <div class="contents-head">
+      <div>
+        <p class="eyebrow">EDITION I</p>
+        <h2>Contents</h2>
+      </div>
+      <button id="closeContents" class="close-button" aria-label="Close contents">×</button>
+    </div>
+    <div id="thumbGrid" class="thumb-grid"></div>
+  </aside>
+  <div id="scrim" class="scrim" hidden></div>
+
+  <section id="contactPanel" class="contact-panel" aria-hidden="true" aria-labelledby="contactTitle">
+    <div class="contact-panel__inner">
+      <div class="contact-panel__head">
+        <div>
+          <p class="eyebrow">START A CONVERSATION</p>
+          <h2 id="contactTitle">Tell us about your project.</h2>
+          <p>Share the key details and NÜ-LINE will review your enquiry personally.</p>
+        </div>
+        <button id="closeContact" class="close-button" type="button" aria-label="Close contact form">×</button>
+      </div>
+
+      <form id="enquiryForm" class="enquiry-form" novalidate>
+        <div class="form-grid">
+          <label><span>Name *</span><input name="name" autocomplete="name" required maxlength="120"></label>
+          <label><span>Company</span><input name="company" autocomplete="organization" maxlength="160"></label>
+          <label><span>Email *</span><input name="email" type="email" autocomplete="email" required maxlength="180"></label>
+          <label><span>Telephone *</span><input name="phone" type="tel" autocomplete="tel" required maxlength="50"></label>
+          <label class="full"><span>Project address / location</span><input name="project_location" autocomplete="street-address" maxlength="240"></label>
+          <label><span>Project type</span>
+            <select name="project_type">
+              <option value="">Select project type</option>
+              <option>New build</option><option>Extension</option><option>Renovation</option>
+              <option>Heritage / conservation</option><option>Commercial</option><option>Other</option>
+            </select>
+          </label>
+          <label><span>Estimated budget</span>
+            <select name="budget">
+              <option value="">Select budget</option>
+              <option>Under £25,000</option><option>£25,000–£50,000</option>
+              <option>£50,000–£100,000</option><option>£100,000–£250,000</option>
+              <option>£250,000+</option><option>Not confirmed</option>
+            </select>
+          </label>
+          <label><span>Required timescale</span><input name="timescale" placeholder="e.g. Autumn 2026" maxlength="100"></label>
+          <fieldset class="full systems-fieldset">
+            <legend>Systems of interest</legend>
+            <div class="systems-grid">
+              <label><input type="checkbox" name="systems" value="HYLINE"><span>HYLINE</span></label>
+              <label><input type="checkbox" name="systems" value="Sheerline"><span>Sheerline</span></label>
+              <label><input type="checkbox" name="systems" value="Residence 9"><span>Residence 9</span></label>
+              <label><input type="checkbox" name="systems" value="Rooflights"><span>Rooflights</span></label>
+              <label><input type="checkbox" name="systems" value="Glass Balustrades"><span>Glass Balustrades</span></label>
+              <label><input type="checkbox" name="systems" value="Architectural Glass"><span>Architectural Glass</span></label>
+            </div>
+          </fieldset>
+          <label class="full"><span>Project details *</span><textarea name="project_details" rows="6" required maxlength="4000" placeholder="Tell us about the project, approximate sizes, design intent and any drawings or specifications available."></textarea></label>
+          <label class="consent full"><input name="consent" type="checkbox" required><span>I agree that NÜ-LINE may use these details to respond to my project enquiry. *</span></label>
+          <label class="website-trap" aria-hidden="true"><span>Website</span><input name="website" tabindex="-1" autocomplete="off"></label>
+        </div>
+        <div class="form-footer">
+          <p id="formStatus" class="form-status" role="status" aria-live="polite"></p>
+          <button id="submitEnquiry" class="primary-button submit-button" type="submit"><span>Send project enquiry</span><span aria-hidden="true">→</span></button>
+        </div>
+      </form>
+
+      <div id="enquirySuccess" class="enquiry-success" hidden>
+        <p class="eyebrow">ENQUIRY RECEIVED</p>
+        <h3>Thank you.</h3>
+        <p>Your project enquiry has been sent securely to NÜ-LINE and added to our enquiry register.</p>
+        <p class="reference-line">Reference: <strong id="enquiryReference"></strong></p>
+        <button id="closeSuccess" class="primary-button" type="button"><span>Return to Edition I</span><span aria-hidden="true">→</span></button>
+      </div>
+    </div>
+  </section>
+
+  <noscript>This digital brochure requires JavaScript.</noscript>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="config.js?v=3.4.0"></script>
+  <script src="app.js?v=3.4.0"></script>
 </body>
 </html>
