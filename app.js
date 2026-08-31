@@ -4,7 +4,7 @@ let opened=false;
 let touchStartX=0;
 let touchStartY=0;
 let changing=false;
-const ASSET_VERSION="3.4.0";
+const ASSET_VERSION="3.5.0";
 const assetUrl=src=>`${src}${src.includes("?")?"&":"?"}v=${ASSET_VERSION}`;
 
 const $=id=>document.getElementById(id);
