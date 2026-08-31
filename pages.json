@@ -79,56 +79,68 @@
   },
   {
     "number": "14",
-    "title": "Residence 9",
+    "title": "Hansen Steel-Look Aluminium",
     "src": "14-14.jpg",
     "portrait": false
   },
   {
     "number": "15",
-    "title": "Heritage Installations",
+    "title": "Hansen Design Freedom",
     "src": "15-15.jpg",
     "portrait": false
   },
   {
     "number": "16",
-    "title": "Contemporary Architectural Installations",
+    "title": "Residence 9",
     "src": "16-16.jpg",
     "portrait": false
   },
   {
     "number": "17",
-    "title": "Glass Balustrades",
+    "title": "Heritage Installations",
     "src": "17-17.jpg",
     "portrait": false
   },
   {
     "number": "18",
-    "title": "Rooflights",
+    "title": "Contemporary Architectural Installations",
     "src": "18-18.jpg",
     "portrait": false
   },
   {
     "number": "19",
-    "title": "Commercial Projects",
+    "title": "Glass Balustrades",
     "src": "19-19.jpg",
     "portrait": false
   },
   {
     "number": "20",
-    "title": "From Concept to Completion",
+    "title": "Rooflights",
     "src": "20-20.jpg",
     "portrait": false
   },
   {
     "number": "21",
-    "title": "Why Choose NÜ-LINE",
+    "title": "Commercial Projects",
     "src": "21-21.jpg",
     "portrait": false
   },
   {
     "number": "22",
-    "title": "Contact",
+    "title": "From Concept to Completion",
     "src": "22-22.jpg",
+    "portrait": false
+  },
+  {
+    "number": "23",
+    "title": "Why Choose NÜ-LINE",
+    "src": "23-23.jpg",
+    "portrait": false
+  },
+  {
+    "number": "24",
+    "title": "Contact",
+    "src": "24-24.jpg",
     "portrait": false
   }
 ]
