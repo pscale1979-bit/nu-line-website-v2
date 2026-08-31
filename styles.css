@@ -284,3 +284,44 @@ body.contact-open{overflow:hidden}
     pointer-events:none;
   }
 }
+
+/* Version 3.6 — gated brochure library */
+body.brochure-open{overflow:hidden}
+.brochure-panel{position:fixed;z-index:72;inset:0;background:rgba(4,7,8,.86);backdrop-filter:blur(12px);opacity:0;visibility:hidden;transition:opacity .3s ease,visibility .3s ease;overflow:auto;padding:clamp(12px,3vw,40px)}
+.brochure-panel.open{opacity:1;visibility:visible}
+.brochure-panel__inner{width:min(1120px,100%);min-height:calc(100svh - clamp(24px,6vw,80px));margin:auto;background:var(--paper);color:#161a1b;border:1px solid rgba(199,168,102,.5);padding:clamp(26px,5vw,72px);box-shadow:0 30px 100px rgba(0,0,0,.55)}
+.brochure-panel__head{display:flex;justify-content:space-between;align-items:flex-start;gap:30px;padding-bottom:32px;border-bottom:1px solid rgba(22,26,27,.15)}
+.brochure-panel__head h2{font:400 clamp(42px,7vw,84px)/.95 Georgia,"Times New Roman",serif;max-width:760px;margin:0 0 18px}
+.brochure-panel__head p:not(.eyebrow){max-width:720px;color:#596162;line-height:1.7;margin:0}
+.brochure-panel .close-button{color:#161a1b;border-color:rgba(22,26,27,.25);flex:0 0 auto}
+.brochure-form{padding-top:36px}
+.brochure-downloads{padding-top:38px}
+.brochure-success{max-width:760px;margin-bottom:34px}
+.brochure-success h3{font:400 clamp(44px,7vw,76px)/1 Georgia,"Times New Roman",serif;margin:0 0 18px}
+.brochure-success>p:not(.eyebrow,.reference-line){color:#596162;line-height:1.7}
+.download-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:22px}
+.download-card{display:flex;flex-direction:column;min-height:310px;padding:30px;border:1px solid #c9c5bb;background:#faf8f2}
+.download-card--wide{grid-column:1/-1;min-height:0}
+.download-card__type{color:#9c7c39;font-size:10px;font-weight:750;letter-spacing:.2em}
+.download-card h4{font:400 clamp(26px,3.4vw,42px)/1.08 Georgia,"Times New Roman",serif;margin:18px 0 14px}
+.download-card p{color:#596162;line-height:1.65;margin:0 0 26px}
+.download-link{display:flex;justify-content:space-between;align-items:center;margin-top:auto;padding:15px 0;border-top:1px solid #9c7c39;border-bottom:1px solid #9c7c39;color:#1b2021;font-size:11px;font-weight:700;letter-spacing:.13em;text-transform:uppercase}
+.download-link:hover{color:#9c7c39}
+.technical-downloads{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.technical-downloads a{padding:14px 15px;border:1px solid #c9c5bb;background:#fff;font-size:11px;font-weight:700;letter-spacing:.08em}
+.technical-downloads a::after{content:"↓";float:right;color:#9c7c39}
+.technical-downloads a:hover{border-color:#9c7c39;color:#9c7c39}
+@media(max-width:760px){
+  .top-actions{gap:10px}
+  .text-button{font-size:9px;letter-spacing:.12em}
+  .brochure-panel{padding:0}
+  .brochure-panel__inner{min-height:100svh;border:0;padding:calc(24px + var(--safe-top)) 18px calc(30px + var(--safe-bottom))}
+  .brochure-panel__head h2{font-size:48px}
+  .download-grid{grid-template-columns:1fr}
+  .download-card--wide{grid-column:auto}
+  .technical-downloads{grid-template-columns:1fr 1fr}
+}
+@media(max-width:430px){
+  .technical-downloads{grid-template-columns:1fr}
+  .topbar .brand span{font-size:14px}
+}

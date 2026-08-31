@@ -6,11 +6,11 @@
   <meta name="theme-color" content="#080c0d">
   <meta name="description" content="NÜ-LINE Architectural Glazing — Edition I. Premium architectural glazing, including Hansen steel-look aluminium windows and doors in Scotland.">
   <link rel="canonical" href="https://www.nu-lineglazing.co.uk/">
-  <title>NÜ-LINE Architectural Glazing | Edition I — Version 3.5</title>
+  <title>NÜ-LINE Architectural Glazing | Edition I — Version 3.6</title>
   <link rel="manifest" href="manifest.webmanifest">
-  <link rel="icon" href="01-cover.jpg?v=3.5.0">
-  <link rel="preload" as="image" href="01-cover.jpg?v=3.5.0">
-  <link rel="stylesheet" href="styles.css?v=3.5.0">
+  <link rel="icon" href="01-cover.jpg?v=3.6.0">
+  <link rel="preload" as="image" href="01-cover.jpg?v=3.6.0">
+  <link rel="stylesheet" href="styles.css?v=3.6.0">
 </head>
 <body>
   <div class="grain" aria-hidden="true"></div>
@@ -22,6 +22,7 @@
     </a>
     <div class="top-actions">
       <button id="contentsBtn" class="text-button" type="button">Contents</button>
+      <button id="brochuresBtn" class="text-button" type="button">Brochures</button>
       <a class="text-button" href="/hansen-steel-look-aluminium-scotland">Hansen</a>
       <button id="contactBtn" class="text-button" type="button">Contact</button>
       <button id="beginProjectBtn" class="text-button project-link" type="button">Begin a project</button>
@@ -31,7 +32,7 @@
   <main>
     <section id="landing" class="landing" aria-label="Edition I cover">
       <canvas id="coverCanvas" class="cover-canvas" aria-label="NÜ-LINE Architectural Glazing Edition I cover"></canvas>
-      <img id="coverSource" class="cover-source" src="01-cover.jpg?v=3.5.0" alt="">
+      <img id="coverSource" class="cover-source" src="01-cover.jpg?v=3.6.0" alt="">
       <div class="cover-shade"></div>
       <div class="landing-content">
         <p class="eyebrow">NÜ-LINE ARCHITECTURAL GLAZING</p>
@@ -84,6 +85,85 @@
     <div id="thumbGrid" class="thumb-grid"></div>
   </aside>
   <div id="scrim" class="scrim" hidden></div>
+
+  <section id="brochurePanel" class="brochure-panel" aria-hidden="true" aria-labelledby="brochureTitle">
+    <div class="brochure-panel__inner">
+      <div class="brochure-panel__head">
+        <div>
+          <p class="eyebrow">TECHNICAL LIBRARY</p>
+          <h2 id="brochureTitle">Access our brochures.</h2>
+          <p>Tell us a little about your project or professional interest. Once submitted, the NÜ-LINE, Hansen and HYLINE brochure library will be available immediately.</p>
+        </div>
+        <button id="closeBrochures" class="close-button" type="button" aria-label="Close brochure library">×</button>
+      </div>
+
+      <form id="brochureForm" class="brochure-form" novalidate>
+        <div class="form-grid">
+          <label><span>Name *</span><input name="name" autocomplete="name" required maxlength="120"></label>
+          <label><span>Company</span><input name="company" autocomplete="organization" maxlength="160"></label>
+          <label><span>Email *</span><input name="email" type="email" autocomplete="email" required maxlength="180"></label>
+          <label><span>Telephone *</span><input name="phone" type="tel" autocomplete="tel" required maxlength="50"></label>
+          <label><span>You are</span>
+            <select name="project_type">
+              <option value="">Please select</option>
+              <option>Architect or designer</option><option>Main contractor</option><option>Developer</option>
+              <option>Glazing or construction professional</option><option>Private client</option><option>Other</option>
+            </select>
+          </label>
+          <label><span>Main area of interest *</span>
+            <select name="brochure_interest" required>
+              <option value="">Please select</option>
+              <option>NÜ-LINE Architectural Glazing</option>
+              <option>Hansen steel-look aluminium</option>
+              <option>HYLINE minimal-frame systems</option>
+              <option>All architectural glazing systems</option>
+            </select>
+          </label>
+          <label class="consent full"><input name="consent" type="checkbox" required><span>I agree that NÜ-LINE may use these details to provide the requested brochures and contact me about relevant products or projects. *</span></label>
+          <label class="website-trap" aria-hidden="true"><span>Website</span><input name="website" tabindex="-1" autocomplete="off"></label>
+        </div>
+        <div class="form-footer">
+          <p id="brochureStatus" class="form-status" role="status" aria-live="polite"></p>
+          <button id="submitBrochureRequest" class="primary-button submit-button" type="submit"><span>Access brochures</span><span aria-hidden="true">→</span></button>
+        </div>
+      </form>
+
+      <div id="brochureDownloads" class="brochure-downloads" hidden>
+        <div class="brochure-success">
+          <p class="eyebrow">ACCESS GRANTED</p>
+          <h3>Your brochure library</h3>
+          <p>Thank you. Your details have been received and the brochures are ready below.</p>
+          <p class="reference-line">Reference: <strong id="brochureReference"></strong></p>
+        </div>
+
+        <div class="download-grid">
+          <article class="download-card">
+            <span class="download-card__type">NÜ-LINE</span>
+            <h4>Architectural Glazing — Edition I</h4>
+            <p>Our complete architectural glazing portfolio, capabilities and system overview.</p>
+            <a class="download-link" href="NULINE-Architectural-Glazing-Edition-I.pdf" download>Download Edition I <span aria-hidden="true">↓</span></a>
+          </article>
+          <article class="download-card">
+            <span class="download-card__type">HANSEN PRODUCTS</span>
+            <h4>2026 Range of Products</h4>
+            <p>Hansen's aluminium systems, including refined steel-look windows and doors.</p>
+            <a class="download-link" href="Hansen-Products-2026-Range.pdf" download>Download Hansen brochure <span aria-hidden="true">↓</span></a>
+          </article>
+          <article class="download-card download-card--wide">
+            <span class="download-card__type">HYLINE</span>
+            <h4>Minimal-frame technical brochures</h4>
+            <p>Select the HYLINE system information most relevant to your project.</p>
+            <div class="technical-downloads">
+              <a href="hyslim_UK.pdf" download>HYSLIM</a><a href="hy40__UK.pdf" download>HY40</a><a href="hy50_UK.pdf" download>HY50</a>
+              <a href="hystyle_UK.pdf" download>HYSTYLE</a><a href="hystyle x_UK.pdf" download>HYSTYLE X</a><a href="hystylewood_UK.pdf" download>HYSTYLE WOOD</a>
+              <a href="hypi_UK.pdf" download>HYPi</a><a href="hypiWOOD_UK.pdf" download>HYPi WOOD</a><a href="hywin48_58_UK.pdf" download>HYWIN</a>
+              <a href="hywall_UK.pdf" download>HYWALL</a><a href="hywood_UK.pdf" download>HYWOOD</a><a href="hyshutter__UK.pdf" download>HYSHUTTER</a>
+            </div>
+          </article>
+        </div>
+      </div>
+    </div>
+  </section>
 
   <section id="contactPanel" class="contact-panel" aria-hidden="true" aria-labelledby="contactTitle">
     <div class="contact-panel__inner">
@@ -153,7 +233,7 @@
 
   <noscript>This digital brochure requires JavaScript.</noscript>
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-  <script src="config.js?v=3.5.0"></script>
-  <script src="app.js?v=3.5.0"></script>
+  <script src="config.js?v=3.6.0"></script>
+  <script src="app.js?v=3.6.0"></script>
 </body>
 </html>

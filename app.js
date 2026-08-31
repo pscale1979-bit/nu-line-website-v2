@@ -4,7 +4,7 @@ let opened=false;
 let touchStartX=0;
 let touchStartY=0;
 let changing=false;
-const ASSET_VERSION="3.5.0";
+const ASSET_VERSION="3.6.0";
 const assetUrl=src=>`${src}${src.includes("?")?"&":"?"}v=${ASSET_VERSION}`;
 
 const $=id=>document.getElementById(id);
@@ -133,7 +133,7 @@ scrim.onclick=closeContents;
 document.addEventListener("keydown",e=>{
   if(e.key==="ArrowRight"||e.key==="PageDown"||e.key===" "){if(opened){e.preventDefault();next()}}
   if(e.key==="ArrowLeft"||e.key==="PageUp"){if(opened){e.preventDefault();prev()}}
-  if(e.key==="Escape")closeContents();
+  if(e.key==="Escape"){closeContents();closeContact();closeBrochures()}
   if((e.key==="c"||e.key==="C")&&opened)openContents();
 });
 
@@ -153,7 +153,7 @@ let wheelDelta=0;
 let wheelResetTimer=0;
 let wheelLockedUntil=0;
 function readerOverlayOpen(){
-  return contents.classList.contains("open")||contactPanel?.classList.contains("open");
+  return contents.classList.contains("open")||contactPanel?.classList.contains("open")||brochurePanel?.classList.contains("open");
 }
 function handleReaderWheel(e){
   if(!opened||reader.hidden||readerOverlayOpen())return;
@@ -188,6 +188,7 @@ $("book").addEventListener("click",e=>{
 
 window.addEventListener("hashchange",()=>{
   if(location.hash==="#contact"){openContact();return}
+  if(location.hash==="#brochures"){openBrochures();return}
   const h=location.hash.replace("#page-","");
   if(location.hash==="#cover"){if(opened)render(0,false);return}
   const i=pages.findIndex(p=>String(p.number).toLowerCase()===h.toLowerCase());
@@ -210,6 +211,10 @@ const contactPanel=$("contactPanel");
 const enquiryForm=$("enquiryForm");
 const formStatus=$("formStatus");
 const enquirySuccess=$("enquirySuccess");
+const brochurePanel=$("brochurePanel");
+const brochureForm=$("brochureForm");
+const brochureStatus=$("brochureStatus");
+const brochureDownloads=$("brochureDownloads");
 let websiteSupabase=null;
 
 function initWebsiteSupabase(){
@@ -231,6 +236,29 @@ function closeContact(){
   document.body.classList.remove("contact-open");
   if(location.hash==="#contact")history.replaceState(null,"",opened?(pages[current]?.number==="cover"?"#cover":`#page-${pages[current]?.number}`):"#cover");
 }
+function brochureAccessUnlocked(){
+  try{return sessionStorage.getItem("nulineBrochuresUnlocked")==="1"}catch{return false}
+}
+function openBrochures(){
+  brochurePanel.classList.add("open");
+  brochurePanel.setAttribute("aria-hidden","false");
+  document.body.classList.add("brochure-open");
+  if(brochureAccessUnlocked()){
+    brochureForm.hidden=true;
+    brochureDownloads.hidden=false;
+  }else{
+    brochureForm.hidden=false;
+    brochureDownloads.hidden=true;
+    setTimeout(()=>brochureForm.querySelector("input,select")?.focus(),250);
+  }
+  history.replaceState(null,"","#brochures");
+}
+function closeBrochures(){
+  brochurePanel.classList.remove("open");
+  brochurePanel.setAttribute("aria-hidden","true");
+  document.body.classList.remove("brochure-open");
+  if(location.hash==="#brochures")history.replaceState(null,"",opened?(pages[current]?.number==="cover"?"#cover":`#page-${pages[current]?.number}`):"#cover");
+}
 function createReference(){
   const d=new Date();
   const stamp=`${d.getFullYear()}${String(d.getMonth()+1).padStart(2,"0")}${String(d.getDate()).padStart(2,"0")}`;
@@ -241,9 +269,63 @@ function normaliseText(value){return String(value||"").trim()}
 
 $("contactBtn").onclick=openContact;
 $("beginProjectBtn").onclick=openContact;
+$("brochuresBtn").onclick=openBrochures;
+$("closeBrochures").onclick=closeBrochures;
 $("closeContact").onclick=closeContact;
 $("closeSuccess").onclick=()=>{closeContact();enquirySuccess.hidden=true;enquiryForm.hidden=false};
 contactPanel.addEventListener("click",e=>{if(e.target===contactPanel)closeContact()});
+brochurePanel.addEventListener("click",e=>{if(e.target===brochurePanel)closeBrochures()});
+
+brochureForm.addEventListener("submit",async e=>{
+  e.preventDefault();
+  brochureStatus.textContent="";
+  if(!brochureForm.reportValidity())return;
+  const fd=new FormData(brochureForm);
+  if(normaliseText(fd.get("website")))return;
+  if(!websiteSupabase){
+    brochureStatus.textContent="The secure brochure connection is not configured yet. Please email paul@nu-lineglazing.co.uk.";
+    return;
+  }
+  const submit=$("submitBrochureRequest");
+  submit.disabled=true;
+  submit.querySelector("span").textContent="Preparing library…";
+  const reference=createReference().replace("WEB-","BRO-");
+  const interest=normaliseText(fd.get("brochure_interest"));
+  const payload={
+    reference,
+    status:"new",
+    source:"website",
+    name:normaliseText(fd.get("name")),
+    company:normaliseText(fd.get("company")),
+    email:normaliseText(fd.get("email")).toLowerCase(),
+    phone:normaliseText(fd.get("phone")),
+    project_location:"",
+    project_type:normaliseText(fd.get("project_type"))||"Brochure request",
+    budget:"",
+    timescale:"",
+    systems:[interest],
+    project_details:`Brochure download request: ${interest}.`,
+    consent:true,
+    page_url:location.href.split("#")[0],
+    user_agent:navigator.userAgent.slice(0,500)
+  };
+  try{
+    const {error}=await websiteSupabase.from("website_enquiries").insert(payload);
+    if(error)throw error;
+    try{sessionStorage.setItem("nulineBrochuresUnlocked","1")}catch{}
+    brochureForm.reset();
+    brochureForm.hidden=true;
+    brochureDownloads.hidden=false;
+    $("brochureReference").textContent=reference;
+    brochureDownloads.scrollIntoView({behavior:"smooth",block:"start"});
+  }catch(err){
+    console.error(err);
+    brochureStatus.textContent="We could not unlock the brochures. Please try again or email paul@nu-lineglazing.co.uk.";
+  }finally{
+    submit.disabled=false;
+    submit.querySelector("span").textContent="Access brochures";
+  }
+});
 
 enquiryForm.addEventListener("submit",async e=>{
   e.preventDefault();
@@ -295,3 +377,4 @@ enquiryForm.addEventListener("submit",async e=>{
 
 initWebsiteSupabase();
 if(location.hash==="#contact")setTimeout(openContact,200);
+if(location.hash==="#brochures")setTimeout(openBrochures,200);
